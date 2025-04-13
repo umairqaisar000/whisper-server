@@ -5,9 +5,15 @@ export interface User {
     userName: string;
 }
 
+export interface ChatMessage {
+    user: User;
+    message: string;
+    timestamp?: Date;
+}
+
 export class UserData {
     static users: User[] = [];
     static rooms: Record<string, Room> = {};
-    static messages: Record<string, { user: User; message: string }[]> = {};
+    static messages: Record<string, ChatMessage[]> = {};
     static userIdCount = 0;
 }
