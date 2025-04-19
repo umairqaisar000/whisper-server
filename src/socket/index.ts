@@ -38,11 +38,18 @@ export default class SocketServer {
     };
 
     constructor(httpServer: HttpServer, socketStore: IUserSocketStore) {
+        const origins = ["http://192.168.100.114:8080", "http://192.168.100.114:3000"];
+
+        // Add CORS_ORIGIN to allowed origins if defined
+        if (process.env.CORS_ORIGIN) {
+            origins.push(process.env.CORS_ORIGIN);
+        }
+
         const ioOptions = {
             cors: {
-                origin: ["http://192.168.100.114:8080", "http://192.168.100.114:3000", process.env.CORS_ORIGIN], // Allow multiple origins
-                methods: ["GET", "POST"], // Allow GET and POST methods
-                allowedHeaders: ["Content-Type", "Authorization"], // Allow these headers
+                origin: origins, // Use the filtered array of origins
+                methods: ["GET", "POST"],
+                allowedHeaders: ["Content-Type", "Authorization"],
                 transports: ["websocket", "polling"],
                 credentials: true
             }
