@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // Now, all responses sent via res.send or res.json will be logged.
-const origins = ["http://192.168.100.114:8080", "http://192.168.100.114:3000"];
+const origins = ["http://localhost:3000", "http://192.168.100.114:8080", "http://192.168.100.114:3000"];
 
 // Add CORS_ORIGIN to allowed origins if defined
 if (process.env.CORS_ORIGIN) {
