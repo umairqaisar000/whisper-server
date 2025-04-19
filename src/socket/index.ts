@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import { Server as HttpServer } from "http";
 import jwt, { JwtPayload } from "jsonwebtoken"; // Ensure JWT is imported
 import { Server as IOServer, Socket } from "socket.io";
@@ -6,7 +7,7 @@ import { IUserSocketStore } from "./userStores";
 import InMemoryUserStore from "./userStores/inMemoryStore";
 
 const secret = "no-salt"; // Secret key for JWT
-
+dotenv.config()
 interface OnlineUserInfo {
     id: number | string;
     userName: string;
@@ -39,10 +40,11 @@ export default class SocketServer {
     constructor(httpServer: HttpServer, socketStore: IUserSocketStore) {
         const ioOptions = {
             cors: {
-                origin: "http://localhost:3000", // Allow only localhost:3000 to connect
+                origin: ["http://192.168.100.114:8080", "http://192.168.100.114:3000", process.env.CORS_ORIGIN], // Allow multiple origins
                 methods: ["GET", "POST"], // Allow GET and POST methods
                 allowedHeaders: ["Content-Type", "Authorization"], // Allow these headers
                 transports: ["websocket", "polling"],
+                credentials: true
             }
         };
 

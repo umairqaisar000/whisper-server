@@ -26,8 +26,10 @@ if (process.env.NODE_ENV === "development") {
 
 // Now, all responses sent via res.send or res.json will be logged.
 const corsOptions = {
+    origin: ["http://192.168.100.114:8080", "http://192.168.100.114:3000", process.env.CORS_ORIGIN],
     methods: ['GET', 'POST'], // Allow GET and POST methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Allow headers
+    credentials: true
 };
 
 app.use(bodyParser.json())
