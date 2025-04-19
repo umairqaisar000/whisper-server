@@ -6,7 +6,7 @@ import { ChatMessage, UserData } from "../Models/user";
 import { IUserSocketStore } from "./userStores";
 import InMemoryUserStore from "./userStores/inMemoryStore";
 
-const secret = "no-salt"; // Secret key for JWT
+const secret = process.env.JWT_SECRET || "no-salt"; // Secret key for JWT
 dotenv.config()
 interface OnlineUserInfo {
     id: number | string;
